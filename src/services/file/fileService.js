@@ -1,6 +1,8 @@
 let xlsx = require( "xlsx" );
 const fs = require( "fs" );
-const { Configuration, OpenAIApi } = require( "openai" )
+const { Configuration, OpenAIApi } = require( "openai" );
+const configuration = new Configuration( { apiKey: "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" } );
+const openai = new OpenAIApi( configuration );
 
 // Transforma datos de Excel xlsx a un archivo JSONL para OpenAI
 async function TransformDataXLSXToJSONL() {
@@ -18,14 +20,18 @@ async function TransformDataXLSXToJSONL() {
 
 // Subir archivo a OpenAI : file-u845UJ9AB1wNc83jpDgevdE2
 async function UploadFileJSONL() {
-  const configuration = new Configuration( { apiKey: "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" } );
-  const openai = new OpenAIApi( configuration );
   const response = await openai.createFile( fs.createReadStream( "src/shared/data-set.jsonl" ), "fine-tune" );
+  return response;
+}
 
+// Listar archivos subidos en API de OpenAI
+async function ListFiles() {
+  const response = await openai.listFiles();
   return response;
 }
 
 module.exports = {
   TransformDataXLSXToJSONL,
-  UploadFileJSONL
+  UploadFileJSONL,
+  ListFiles
 }

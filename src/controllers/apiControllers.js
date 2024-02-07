@@ -26,9 +26,19 @@ async function UploadFileJSONL( req, res ) {
   res.status( response.status ).send( response.data );
 }
 
+/**
+ * Listar archivos subidos al API de OpenAI
+ */
+async function ListFiles( req, res ) {
+  const response = await fileService.ListFiles();
+
+  res.status( response.status ).send( response.data );
+}
+
 // Exportación de los Endpoints
 module.exports = {
   Test,
   TransformDataXLSXToJSONL,
-  UploadFileJSONL
+  UploadFileJSONL,
+  ListFiles
 }
