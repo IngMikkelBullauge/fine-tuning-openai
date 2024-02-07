@@ -4,5 +4,7 @@ const router = express.Router();
 
 router
   .post( "/test", apiController.Test )
+  .post( "/transform-data-xlsx-to-jsonl", apiController.TransformDataXLSXToJSONL )
+  .post( "/upload-file-jsonl", apiController.UploadFileJSONL )
 
 module.exports = router;
